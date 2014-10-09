@@ -69,14 +69,18 @@ void ihevcd_init_function_ptr(void *pv_codec)
         case ARCH_X86_SSSE3:
             ihevcd_init_function_ptr_ssse3(pv_codec);
             break;
+#ifndef USE_CLOVERTRAIL
         case ARCH_X86_SSE42:
             ihevcd_init_function_ptr_sse42(pv_codec);
             break;
+#endif
         case ARCH_X86_AVX2:
 #ifndef DISABLE_AVX2
             ihevcd_init_function_ptr_avx2(pv_codec);
 #else
+#ifndef USE_CLOVERTRAIL
             ihevcd_init_function_ptr_sse42(pv_codec);
+#endif
 #endif
             break;
         default:
